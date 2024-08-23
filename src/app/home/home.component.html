@@ -1,0 +1,7 @@
+<div>
+  @for (todo of filteredTodos(); track todo.todoId) {
+    <p> {{ todo.todoId }}</p>
+    <p> {{ todo.title }}</p>
+    <p> {{ todo.description }}</p>
+  }
+</div>
