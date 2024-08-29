@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class CrudService {
 
-  private getTodoListUrl = 'localhost:8080/api/v1/todo-app/home';
+  private getTodoListUrl = 'http://localhost:8080/api/v1/todo-app/home';
 
   todoSignalsArray = signal<TodoDTO[]>([]);
   errorMessage = signal<string>('');
