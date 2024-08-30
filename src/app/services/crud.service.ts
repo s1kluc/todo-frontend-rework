@@ -19,7 +19,7 @@ export class CrudService {
 
     this.http.get<TodoDTO[]>(`${this.getTodoListUrl}?done=${done}`).subscribe({
       next: value => this.todoSignalsArray.set(value),
-      error: error => this.errorMessage.set('Es ist ein Fehler aufgetreten.')
+      error:git => this.errorMessage.set('Es ist ein Fehler aufgetreten.')
     });
   }
 }
