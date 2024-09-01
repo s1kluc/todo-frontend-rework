@@ -12,14 +12,39 @@ export class CrudService {
   todoSignalsArray = signal<TodoDTO[]>([]);
   errorMessage = signal<string>('');
   loadingState = signal<boolean>(false);
+
   constructor(private http: HttpClient) {
   }
 
   getTodos(done: boolean) {
-
+    this.loadingState.set(true);
     this.http.get<TodoDTO[]>(`${this.getTodoListUrl}?done=${done}`).subscribe({
       next: value => this.todoSignalsArray.set(value),
-      error:git => this.errorMessage.set('Es ist ein Fehler aufgetreten.')
     });
+    this.loadingState.set(false);
+  }
+
+  deleteTodo(todoId: string) {
+    console.log('passt')
+    this.http.delete(`${this.getTodoListUrl}/${todoId}/delete`).subscribe(
+    );
+  }
+
+  createTodo(todoTitle: string, todoDescription: string) {
+    console.log(todoTitle)
+    console.log(todoDescription)
+    this.http.post<TodoDTO>(`${this.getTodoListUrl}/create`,
+      {
+        userId: '9d0cdf53-96bb-46c0-8509-5b980063afe3',
+        title: todoTitle,
+        description: todoDescription
+      }
+    ).subscribe({
+      next: todo => {
+        this.todoSignalsArray.update(value => [...value, todo]);
+        console.log(todo.todoId)
+      },
+    });
+    console.log("test")
   }
 }

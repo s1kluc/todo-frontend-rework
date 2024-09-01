@@ -1,7 +1,20 @@
 <div>
   @for (todo of filteredTodos(); track todo.todoId) {
-    <p> {{ todo.todoId }}</p>
-    <p> {{ todo.title }}</p>
-    <p> {{ todo.description }}</p>
+    <mat-card>
+      <p> {{ todo.todoId }}</p>
+      <p> {{ todo.title }}</p>
+      <p> {{ todo.description }}</p>
+      <div>
+        <button mat-raised-button routerLink="/todo-edit-page" [queryParams]="{todoid: todo.todoId}">Bearbeiten</button>
+        <button mat-raised-button (click)="crudService.deleteTodo(todo.todoId)">Löschen</button>
+      </div>
+    </mat-card>
   }
 </div>
+
+<div>
+  <button mat-fab routerLink="/create-new-todo">+</button>
+</div>
+<router-outlet></router-outlet>
+
+
