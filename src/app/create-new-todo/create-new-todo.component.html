@@ -1,0 +1,11 @@
+<div>
+  <p>Titel</p>
+  <input [(ngModel)]="title" type="text" placeholder="Titel">
+  <p>Beschreibung</p>
+  <input [(ngModel)]="description" type="text" placeholder="Beschreibung">
+</div>
+
+<div>
+  <button mat-raised-button routerLink="/home" (click)="createTodo()">Speichern</button>
+  <button mat-raised-button routerLink="/home">Zurück</button>
+</div>
