@@ -1,11 +1,71 @@
-<div>
-  <p>Titel</p>
-  <input [(ngModel)]="title" type="text" placeholder="Titel">
-  <p>Beschreibung</p>
-  <input [(ngModel)]="description" type="text" placeholder="Beschreibung">
-</div>
+<!--<div>-->
+<!--  <p>Titel</p>-->
+<!--  <input [(ngModel)]="title" type="text" placeholder="Titel">-->
+<!--  <p>Beschreibung</p>-->
+<!--  <input [(ngModel)]="description" type="text" placeholder="Beschreibung">-->
+<!--</div>-->
 
-<div>
-  <button mat-raised-button routerLink="/home" (click)="createTodo()">Speichern</button>
-  <button mat-raised-button routerLink="/home">Zurück</button>
-</div>
+<form [formGroup]="createTodoForm" (ngSubmit)="createTodo()" class="create-form">
+  <div class="form-input">
+    <input formControlName="title" placeholder="Aufgabenname" type="text">
+    <textarea #textArea (input)="resizeTextArea()" formControlName="description" placeholder="Beschreibung"></textarea>
+  </div>
+  <div class="button-container">
+    <button mat-dialog-close style="border-radius: 5px" class="cancel-button" mat-raised-button>Abbrechen</button>
+    <button mat-dialog-close type="submit" style="border-radius: 5px" class="validate-button" [disabled]="!createTodoForm.valid" mat-raised-button>Speichern</button>
+  </div>
+</form>
+
+<style>
+  .create-form{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  input, textarea{
+    border: none;
+    outline: none !important;
+  }
+
+  input{
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  textarea{
+    resize: none;
+    box-sizing: border-box;
+  }
+
+  button:disabled{
+    background: #d3d3d3 !important;
+    color: grey !important;
+  }
+
+  .form-input{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button-container{
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+    border-top: 2px solid #d3d3d3;
+    padding-top: 1rem;
+  }
+
+  button{
+    color: black !important;
+  }
+
+  .validate-button{
+    background: aliceblue !important;
+  }
+
+  .cancel-button{
+    background: #f9f9f9 !important;
+  }
+</style>

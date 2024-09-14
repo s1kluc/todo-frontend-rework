@@ -1,0 +1,78 @@
+<div class="todo-container">
+  <div class="todo-container-content">
+    <input type="checkbox">
+    <div>
+      <p class="todo-title">{{todo()?.title}}</p>
+      <p class="todo-description">{{todo()?.description}}</p>
+    </div>
+  </div>
+  <div class="todo-actions">
+    <button class="edit-button" (click)="openEditTodoModal()">
+      <ng-icon name="heroPencil"/>
+    </button>
+    <button (click)="delete(todo()!.todoId)" class="danger-button" >
+      <ng-icon name="heroTrash"/>
+    </button>
+  </div>
+</div>
+
+<style>
+  ng-icon{
+    font-size: 20px;
+  }
+  p{
+    margin: 0;
+    padding: 0;
+  }
+.todo-actions{
+  display: flex;
+  gap: .5rem;
+}
+
+
+button{
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+}
+
+.edit-button:hover{
+  background: #d3d3d3;
+}
+
+.danger-button{
+  color: red;
+}
+
+.danger-button:hover{
+  background: red;
+  color: white;
+}
+
+  .todo-title{
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .todo-description{
+    color: grey;
+  }
+
+  .todo-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px 8px 5px;
+    border-radius: 8px;
+    align-items: center;
+  }
+
+  .todo-container-content{
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+  }
+</style>

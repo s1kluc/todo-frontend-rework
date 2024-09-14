@@ -7,11 +7,15 @@ import {MatIcon} from "@angular/material/icon";
 import {MatListItem, MatNavList} from "@angular/material/list";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {MatButton, MatFabButton} from "@angular/material/button";
+import {LayoutComponent} from "../layout/layout.component";
+import {TodoComponent} from "../todo/todo.component";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    LayoutComponent,
     RouterLink,
     MatCard,
     SidenavbarComponent,
@@ -23,16 +27,16 @@ import {MatButton, MatFabButton} from "@angular/material/button";
     MatSidenavContent,
     MatButton,
     RouterOutlet,
-    MatFabButton
+    MatFabButton,
+    TodoComponent,
+    MatProgressSpinner
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-ngOnInit() {
-  this.crudService.getTodos(false);
-}
+export class HomeComponent {
 
   crudService: CrudService = inject(CrudService);
+  loading = this.crudService.loadingState;
   filteredTodos = this.crudService.todoSignalsArray;
 }

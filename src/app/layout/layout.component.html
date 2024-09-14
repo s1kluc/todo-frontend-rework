@@ -1,0 +1,68 @@
+<div class="layout">
+  <div class="side-nav">
+    <a routerLink="/home">
+      <ng-icon name="heroHomeModern"></ng-icon>
+      Home
+    </a>
+    <a (click)="openCreateTodoModal()" >
+      <ng-icon name="heroPlus"></ng-icon>
+      Aufgabe hinzufügen
+    </a>
+    <a (click)="openSearchTodoModal()">
+      <ng-icon name="heroMagnifyingGlass"></ng-icon>
+      Suchen
+    </a>
+    <a>
+      <ng-icon name="heroCalendar"></ng-icon>
+      Ungeplante Todos
+    </a>
+    <a>
+      <ng-icon name="heroCalendar"></ng-icon>
+      Heute
+    </a>
+    <a>
+      <ng-icon name="heroCalendar"></ng-icon>
+      Demnächst
+    </a>
+  </div>
+  <div class="main-container">
+    <div class="main-container-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+
+<style>
+  .layout {
+    display: flex;
+  }
+
+  .side-nav a {
+    padding: 8px 5px 8px 5px;
+    display: block;
+    border-radius: .5rem;
+  }
+
+  .side-nav a:hover {
+    background: #d3d3d3;
+  }
+
+  .main-container-content {
+    width: 60%;
+    margin: auto;
+
+  }
+
+  .main-container {
+    flex: 1;
+    padding: 2rem 1rem 2rem 200px;
+  }
+
+  .side-nav {
+    padding: 0 8px 0 8px;
+    height: 100%;
+    background: #f3f3f3;
+    position: fixed;
+    width: 12.5rem;
+  }
+</style>
