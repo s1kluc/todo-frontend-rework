@@ -1,9 +1,10 @@
 export interface TodoDTO{
   userId: string,
-  todoId: string,
+  todoId: number,
   title: string,
   description: string,
   done: boolean,
-  createdAt: string,
-  updatedAt: string
+  createdAt: Date,
+  updatedAt: Date,
+  dueDate: Date
 }

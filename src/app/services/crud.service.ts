@@ -9,7 +9,7 @@ import {CreateTodo} from "../model/create.todo";
 })
 export class CrudService {
 
-  private getTodoListUrl = 'http://localhost:8080/api/v1/todo-app/home';
+  private getTodoListUrl = 'http://localhost:8080/api/v1/todos';
 
   todoSignalsArray = signal<TodoDTO[]>([]);
   errorMessage = signal<string>('');
@@ -27,8 +27,8 @@ export class CrudService {
     });
   }
 
-  deleteTodo( todoId: string) {
-    this.http.delete<void>(`${this.getTodoListUrl}?user=9d0cdf53-96bb-46c0-8509-5b980063afe3&todo=${todoId}`).subscribe(
+  deleteTodo(todoId: number) {
+    this.http.delete<void>(`${this.getTodoListUrl}/${todoId}`).subscribe(
       {
         next: () => {
           this.todoSignalsArray.update(value => value.filter((todo) => todo.todoId !== todoId))
@@ -41,7 +41,7 @@ export class CrudService {
 
   createTodo(todoCreation: CreateTodo) {
 
-    this.http.post<TodoDTO>(`${this.getTodoListUrl}?user=9d0cdf53-96bb-46c0-8509-5b980063afe3`,
+    this.http.post<TodoDTO>(`${this.getTodoListUrl}`,
       todoCreation
     ).subscribe({
       next: todo => {
@@ -51,16 +51,16 @@ export class CrudService {
     });
   }
 
-  editTodo(todoId:string, todoEdit: CreateTodo) {
-    this.http.put<void>(`${this.getTodoListUrl}?user=9d0cdf53-96bb-46c0-8509-5b980063afe3`, {
+  editTodo(todoId: number, todoEdit: CreateTodo) {
+    this.http.put<void>(`${this.getTodoListUrl}/${todoId}`, {
       todoId: todoId,
-      title:todoEdit.title,
+      title: todoEdit.title,
       description: todoEdit.description
     }).subscribe(
       {
         next: () => {
           this.todoSignalsArray.update((todoArray) => {
-            let updateItem = this.todoSignalsArray().filter(itemToUpdate => itemToUpdate.todoId === String(todoId))[0];
+            let updateItem = this.todoSignalsArray().find(itemToUpdate => itemToUpdate.todoId === todoId);
             let indexOfUpdateItem = todoArray.indexOf(updateItem!);
             todoArray[indexOfUpdateItem].title = todoEdit.title;
             todoArray[indexOfUpdateItem].description = todoEdit.description;
@@ -73,16 +73,26 @@ export class CrudService {
     )
   }
 
-  getSingleTodoById(todoId: string): TodoDTO{
+  getSingleTodoById(todoId: number): TodoDTO {
     return this.todoSignalsArray().find((todo) => todo.todoId === todoId)!;
   }
 
-  getFilteredTodo(searcTerm: string){
-    let filteredTodo: TodoDTO[] = [];
-    if(searcTerm){
-      filteredTodo = this.todoSignalsArray().filter((todo) => todo.title.toLowerCase().indexOf(searcTerm.toLowerCase()) !== -1);
-    }
-    return filteredTodo;
+  updateStatus(todoId: number, status: boolean) {
+    this.http.put(`${this.getTodoListUrl}/status/${todoId}`, {}).pipe().subscribe(
+      {
+        next: value => this.todoSignalsArray.update((todoArray) => {
+          let updateItem = this.todoSignalsArray().find((todo) => todo.todoId === todoId);
+          let indexOfUpdateItem = todoArray.indexOf(updateItem!);
+          todoArray[indexOfUpdateItem].done = status;
+          return this.filterStatusTodo(todoArray);
+        })
+      }
+    )
+  }
+
+
+  private filterStatusTodo(todos: TodoDTO[]) : TodoDTO[]{
+    return todos.filter((todo) => todo.done !== true);
   }
 
 }

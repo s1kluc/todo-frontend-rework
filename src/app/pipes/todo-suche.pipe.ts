@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {TodoDTO} from "./model/todoDTO";
+import {TodoDTO} from "../model/todoDTO";
 
 @Pipe({
   name: 'todoSuche',

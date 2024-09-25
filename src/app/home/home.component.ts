@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, effect, inject} from '@angular/core';
 import {CrudService} from "../services/crud.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {MatCard} from "@angular/material/card";
@@ -10,6 +10,8 @@ import {MatButton, MatFabButton} from "@angular/material/button";
 import {LayoutComponent} from "../layout/layout.component";
 import {TodoComponent} from "../todo/todo.component";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {StatusfilterPipe} from "../pipes/statusfilter.pipe";
+import {TodoDTO} from "../model/todoDTO";
 
 @Component({
   selector: 'app-home',
@@ -29,7 +31,8 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     RouterOutlet,
     MatFabButton,
     TodoComponent,
-    MatProgressSpinner
+    MatProgressSpinner,
+    StatusfilterPipe
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -39,4 +42,6 @@ export class HomeComponent {
   crudService: CrudService = inject(CrudService);
   loading = this.crudService.loadingState;
   filteredTodos = this.crudService.todoSignalsArray;
+
+  constructor() {}
 }

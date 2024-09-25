@@ -5,6 +5,7 @@ import {RouterLink} from "@angular/router";
 import {CrudService} from "../services/crud.service";
 import {MatDialog} from "@angular/material/dialog";
 import {TodoEditPageComponent} from "../todo-edit-page/todo-edit-page.component";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-todo',
@@ -12,6 +13,7 @@ import {TodoEditPageComponent} from "../todo-edit-page/todo-edit-page.component"
   imports: [
     NgIcon,
     RouterLink,
+    FormsModule,
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css'
@@ -21,7 +23,7 @@ export class TodoComponent {
   crudService: CrudService = inject(CrudService);
   dialog = inject(MatDialog);
 
-  delete(todoId: string) {
+  delete(todoId: number) {
     this.crudService.deleteTodo(todoId);
   }
 
@@ -32,5 +34,9 @@ export class TodoComponent {
         todoId: this.todo()?.todoId
       }
     })
+  }
+
+  changeStatus(todoId: number, status: boolean ){
+    this.crudService.updateStatus(todoId, status);
   }
 }

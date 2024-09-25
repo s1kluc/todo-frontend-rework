@@ -27,7 +27,7 @@ export class TodoEditPageComponent  {
   description: string = '';
   router: ActivatedRoute = inject(ActivatedRoute);
   crudService: CrudService = inject(CrudService);
-  data: {todoId: string} = inject(MAT_DIALOG_DATA);
+  data: {todoId: number} = inject(MAT_DIALOG_DATA);
   todo: TodoDTO = this.crudService.getSingleTodoById(this.data?.todoId);
 
   editTodoForm = new FormGroup(

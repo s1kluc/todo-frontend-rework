@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {FormsModule} from "@angular/forms";
-import {TodoSuchePipe} from "../todo-suche.pipe";
+import {TodoSuchePipe} from "../pipes/todo-suche.pipe";
 import {CrudService} from "../services/crud.service";
 import {TodoComponent} from "../todo/todo.component";
 

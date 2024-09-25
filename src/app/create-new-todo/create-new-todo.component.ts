@@ -44,11 +44,10 @@ export class CreateNewTodoComponent {
 
   createTodo() {
     const todoCreation : CreateTodo = {
+      userId: '9d0cdf53-96bb-46c0-8509-5b980063afe3',
       title: this.createTodoForm.get('title')?.value,
       description: this.createTodoForm.get('description')?.value
     } as CreateTodo;
-
-    console.log()
 
     this.crudService.createTodo(todoCreation);
   }

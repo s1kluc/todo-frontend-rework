@@ -4,7 +4,7 @@
   </div>
 } @else {
   <app-layout>
-    @for (todo of filteredTodos() | statusfilter;  track todo.todoId) {
+    @for (todo of filteredTodos() | statusfilter : 'today' : false ;  track todo.todoId) {
       <app-todo [todo]="todo"/>
     }
   </app-layout>
@@ -18,5 +18,3 @@
     transform: translate(-50%, -50%);
   }
 </style>
-
-
