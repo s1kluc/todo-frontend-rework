@@ -1,7 +1,9 @@
 <form [formGroup]="editTodoForm" (ngSubmit)="editTodo()" class="edit-form">
   <div class="form-input">
-    <input formControlName="title" placeholder="Aufgabenname" type="text">
-    <textarea #textArea (input)="resizeTextArea()" formControlName="description" placeholder="Beschreibung"></textarea>
+    <input class="form-input-field" formControlName="title" placeholder="Aufgabenname" type="text">
+    <textarea class="form-input-field" #textArea (input)="resizeTextArea()" formControlName="description"
+              placeholder="Beschreibung"></textarea>
+    <input class="form-input-field" type="date" placeholder="" formControlName="dueDate">
   </div>
   <div class="button-container">
     <button mat-dialog-close style="border-radius: 5px" class="cancel-button" mat-raised-button>Abbrechen</button>
@@ -13,6 +15,15 @@
 </form>
 
 <style>
+  .form-input-field{
+    padding: 0.5rem;
+  }
+
+  .form-input-field[type="date"]::-webkit-datetime-edit {
+    color: transparent;
+    mso-pattern: transparent;
+  }
+
   .edit-form {
     padding: 2rem;
     display: flex;

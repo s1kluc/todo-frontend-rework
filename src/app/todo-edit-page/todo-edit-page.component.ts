@@ -25,6 +25,7 @@ import {TodoDTO} from "../model/todoDTO";
 export class TodoEditPageComponent  {
   title: string = '';
   description: string = '';
+  dueDate: Date = new Date();
   router: ActivatedRoute = inject(ActivatedRoute);
   crudService: CrudService = inject(CrudService);
   data: {todoId: number} = inject(MAT_DIALOG_DATA);
@@ -33,7 +34,8 @@ export class TodoEditPageComponent  {
   editTodoForm = new FormGroup(
     {
       title: new FormControl(this.todo.title, [Validators.required]),
-      description: new FormControl(this.todo.description)
+      description: new FormControl(this.todo.description),
+      dueDate: new FormControl(this.todo.dueDate)
     }
   )
 
@@ -42,7 +44,8 @@ export class TodoEditPageComponent  {
   editTodo(){
     const todoEdit: CreateTodo = {
       title: this.editTodoForm.get('title')?.value,
-      description: this.editTodoForm.get('description')?.value
+      description: this.editTodoForm.get('description')?.value,
+      dueDate: this.editTodoForm.get('dueDate')?.value
     } as CreateTodo;
 
     this.crudService.editTodo(this.data?.todoId, todoEdit);

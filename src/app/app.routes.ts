@@ -4,6 +4,7 @@ import {TodoEditPageComponent} from "./todo-edit-page/todo-edit-page.component";
 import {NotFoundPageComponent} from "./not-found-page/not-found-page.component";
 import {UnplannedComponent} from "./unplanned/unplanned.component";
 import {TodayPlannedComponent} from "./today-planned/today-planned.component";
+import {LaterPlannedComponent} from "./later-planned/later-planned.component";
 
 export const routes: Routes = [
   {
@@ -22,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'today',
     component: TodayPlannedComponent
+  },
+  {
+    path:'planned',
+    component: LaterPlannedComponent
   },
   {
     path: '**',

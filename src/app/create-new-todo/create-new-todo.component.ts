@@ -31,31 +31,33 @@ export class CreateNewTodoComponent {
 
   title: string = '';
   description: string = '';
+  dueDate: Date  = new Date();
   crudService: CrudService = inject(CrudService);
 
   createTodoForm = new FormGroup(
     {
       title: new FormControl('', [Validators.required]),
-      description: new FormControl('')
+      description: new FormControl(''),
+      dueDate: new FormControl()
     }
   )
 
   @ViewChild('textArea') textAreaElement: ElementRef<HTMLTextAreaElement> = {} as ElementRef;
 
   createTodo() {
-    const todoCreation : CreateTodo = {
+    const todoCreation: CreateTodo = {
       userId: '9d0cdf53-96bb-46c0-8509-5b980063afe3',
       title: this.createTodoForm.get('title')?.value,
-      description: this.createTodoForm.get('description')?.value
+      description: this.createTodoForm.get('description')?.value,
+      dueDate: this.createTodoForm.get('dueDate')?.value
     } as CreateTodo;
-
     this.crudService.createTodo(todoCreation);
   }
 
-  resizeTextArea(): void{
+  resizeTextArea(): void {
     const textArea = this.textAreaElement.nativeElement;
     textArea.style.height = 'auto';
-    if(textArea.scrollHeight < 500){
+    if (textArea.scrollHeight < 500) {
       textArea.style.height = `${textArea.scrollHeight}px`;
     } else {
       textArea.style.height = '500px';

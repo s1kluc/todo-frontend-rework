@@ -25,7 +25,6 @@ export class StatusfilterPipe implements PipeTransform {
 
 
     if(wstatus === 'today'){
-      console.log(todos);
       const today = new Date();
       todos = todos.filter((todo) => {
         if(todo.dueDate){

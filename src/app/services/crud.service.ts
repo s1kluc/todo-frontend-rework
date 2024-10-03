@@ -46,7 +46,6 @@ export class CrudService {
     ).subscribe({
       next: todo => {
         this.todoSignalsArray.update(value => [...value, todo]);
-        console.log(todo.todoId)
       },
     });
   }
@@ -74,7 +73,9 @@ export class CrudService {
   }
 
   getSingleTodoById(todoId: number): TodoDTO {
-    return this.todoSignalsArray().find((todo) => todo.todoId === todoId)!;
+    let todoDTO: TodoDTO;
+    todoDTO = this.todoSignalsArray().find((todo) => todo.todoId === todoId)!;
+    return todoDTO;
   }
 
   updateStatus(todoId: number, status: boolean) {
@@ -91,7 +92,7 @@ export class CrudService {
   }
 
 
-  private filterStatusTodo(todos: TodoDTO[]) : TodoDTO[]{
+  private filterStatusTodo(todos: TodoDTO[]): TodoDTO[] {
     return todos.filter((todo) => todo.done !== true);
   }
 
